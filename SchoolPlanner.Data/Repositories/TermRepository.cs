@@ -18,18 +18,12 @@ namespace SchoolPlanner.Data.Repositories
             return await _dbContext.Terms.ToListAsync(); 
         }
 
-        public async Task<bool> AddNewTermAsync(Term newTerm)
+        public async Task<Term> AddNewTermAsync(Term newTerm)
         {
             await _dbContext.Terms.AddAsync(newTerm);
-            if(await _dbContext.SaveChangesAsync() > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false; 
-            }
-            
+            await _dbContext.SaveChangesAsync();
+
+            return newTerm; 
         }
     }
 }

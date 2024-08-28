@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolPlanner.Data.Interfaces;
-using SchoolPlanner.Data.Models; 
+using SchoolPlanner.Data.Models;
+using System.Net;
 
 namespace SchoolPlanner.Api.Controllers
 {
@@ -15,15 +16,33 @@ namespace SchoolPlanner.Api.Controllers
         }
 
         [HttpGet(Name = "GetTermTest")]
-        public async Task<IEnumerable<Term>> Get()
+        public async Task<ActionResult<IEnumerable<Term>>> Get()
         {
-            return await _termRepository.GetAllTermsAsync(); 
+            try
+            {
+                var terms = await _termRepository.GetAllTermsAsync();
+                return Ok(terms);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, $"An error occurred while fetching terms. {ex}");
+            }
+
         }
 
         [HttpPost(Name = "CreateNewTerm")]
-        public async Task<bool> Post([FromBody]Term term)
+        public async Task<ActionResult<Term>> Post([FromBody]Term term)
         {
-            return await _termRepository.AddNewTermAsync(term);
+            try
+            {
+                var newTerm =  await _termRepository.AddNewTermAsync(term);
+                return Ok(term);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
         }
     }
 }
