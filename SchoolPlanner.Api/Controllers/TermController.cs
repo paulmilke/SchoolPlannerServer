@@ -36,7 +36,7 @@ namespace SchoolPlanner.Api.Controllers
             try
             {
                 var newTerm =  await _termRepository.AddNewTermAsync(term);
-                return Ok(term);
+                return Ok(newTerm);
             }
             catch
             {
