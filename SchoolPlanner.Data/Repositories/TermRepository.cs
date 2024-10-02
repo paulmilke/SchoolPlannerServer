@@ -18,6 +18,11 @@ namespace SchoolPlanner.Data.Repositories
             return await _dbContext.Terms.ToListAsync(); 
         }
 
+        public async Task<Term?> FindTermAsync(int termId)
+        {
+            return await _dbContext.Terms.FindAsync(termId);
+        }
+
         public async Task<Term> AddNewTermAsync(Term newTerm)
         {
             await _dbContext.Terms.AddAsync(newTerm);
@@ -34,10 +39,19 @@ namespace SchoolPlanner.Data.Repositories
             return updatedTerm;
         }
 
-        public async Task<int> DeleteTermAsync(Term term)
+        public async Task<int?> DeleteTermAsync(int termId)
         {
-            _dbContext.Terms.Remove(term); 
-            return await _dbContext.SaveChangesAsync();
+            var term = await FindTermAsync(termId);
+            if (term != null)
+            {
+                _dbContext.Terms.Remove(term);
+                return await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                return null; 
+            }
+
         }
     }
 }
