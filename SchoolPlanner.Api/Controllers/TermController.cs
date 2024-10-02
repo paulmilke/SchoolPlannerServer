@@ -58,5 +58,25 @@ namespace SchoolPlanner.Api.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
+        [HttpDelete(Name = "DeleteTerm")]
+        public async Task<ActionResult<int>> Delete(Term term)
+        {
+            try
+            {
+                int response = await _termRepository.DeleteTermAsync(term);
+                if(response != 0)
+                return Ok(response);
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace SchoolPlanner.Data.Interfaces
         Task<IEnumerable<Term>> GetAllTermsAsync();
         Task<Term> AddNewTermAsync(Term newTerm);
         Task<Term> UpdateExistingTermAsync(Term updatedTerm); 
+        Task<int> DeleteTermAsync(Term term);
     }
 }

@@ -33,5 +33,11 @@ namespace SchoolPlanner.Data.Repositories
 
             return updatedTerm;
         }
+
+        public async Task<int> DeleteTermAsync(Term term)
+        {
+            _dbContext.Terms.Remove(term); 
+            return await _dbContext.SaveChangesAsync();
+        }
     }
 }
