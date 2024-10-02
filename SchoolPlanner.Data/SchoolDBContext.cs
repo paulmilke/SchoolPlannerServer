@@ -14,5 +14,27 @@ namespace SchoolPlanner.Data
 
         public DbSet<Term> Terms { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Term>().Property<DateTime>("UpdatedOn"); 
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            SetTimeStamps(); 
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+
+
+        private void SetTimeStamps()
+        {
+            var entries = ChangeTracker.Entries()
+                .Where(e => e.Entity is Term && (e.State == EntityState.Modified));
+
+            foreach (var entry in entries)
+            {
+                entry.Property("UpdatedOn").CurrentValue = DateTime.UtcNow;
+            }
+        }
     }
 }
