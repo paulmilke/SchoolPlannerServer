@@ -44,5 +44,19 @@ namespace SchoolPlanner.Api.Controllers
             }
 
         }
+
+        [HttpPut(Name = "UpdateTerm")]
+        public async Task<ActionResult<Term>> Put([FromBody]Term updatedTerm)
+        {
+            try
+            {
+                var updated = await _termRepository.UpdateExistingTermAsync(updatedTerm);
+                return Ok(updated);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
     }
 }
