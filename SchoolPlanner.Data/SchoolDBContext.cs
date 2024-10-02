@@ -16,16 +16,17 @@ namespace SchoolPlanner.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Term>().Property<DateTime>("UpdatedOn"); 
+            modelBuilder.Entity<Term>().Property<DateTime>("UpdatedOn"); //Shadow property
         }
 
+        //Overrides the standard SaveChangesAsync method to include the updateon change. 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             SetTimeStamps(); 
             return await base.SaveChangesAsync(cancellationToken);
         }
 
-
+        //Updates the UpdateOn column for the Term table. 
         private void SetTimeStamps()
         {
             var entries = ChangeTracker.Entries()
