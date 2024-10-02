@@ -25,5 +25,13 @@ namespace SchoolPlanner.Data.Repositories
 
             return newTerm; 
         }
+
+        public async Task<Term> UpdateExistingTermAsync(Term updatedTerm)
+        {
+            _dbContext.Terms.Update(updatedTerm);
+            await _dbContext.SaveChangesAsync();
+
+            return updatedTerm;
+        }
     }
 }
