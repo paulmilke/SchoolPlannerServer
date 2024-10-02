@@ -60,12 +60,12 @@ namespace SchoolPlanner.Api.Controllers
         }
 
         [HttpDelete(Name = "DeleteTerm")]
-        public async Task<ActionResult<int>> Delete(Term term)
+        public async Task<ActionResult<int>> Delete(int termId)
         {
             try
             {
-                int response = await _termRepository.DeleteTermAsync(term);
-                if(response != 0)
+                var response = await _termRepository.DeleteTermAsync(termId);
+                if(response != null)
                 return Ok(response);
                 else
                 {
