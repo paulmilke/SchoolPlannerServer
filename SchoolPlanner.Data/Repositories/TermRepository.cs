@@ -39,10 +39,19 @@ namespace SchoolPlanner.Data.Repositories
             return updatedTerm;
         }
 
-        public async Task<int> DeleteTermAsync(Term term)
+        public async Task<int?> DeleteTermAsync(int termId)
         {
-            _dbContext.Terms.Remove(term); 
-            return await _dbContext.SaveChangesAsync();
+            var term = await FindTermAsync(termId);
+            if (term != null)
+            {
+                _dbContext.Terms.Remove(term);
+                return await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                return null; 
+            }
+
         }
     }
 }
