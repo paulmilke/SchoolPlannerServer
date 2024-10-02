@@ -18,6 +18,11 @@ namespace SchoolPlanner.Data.Repositories
             return await _dbContext.Terms.ToListAsync(); 
         }
 
+        public async Task<Term?> FindTermAsync(int termId)
+        {
+            return await _dbContext.Terms.FindAsync(termId);
+        }
+
         public async Task<Term> AddNewTermAsync(Term newTerm)
         {
             await _dbContext.Terms.AddAsync(newTerm);
