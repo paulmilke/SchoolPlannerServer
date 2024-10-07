@@ -18,5 +18,13 @@ namespace SchoolPlanner.Data.Repositories
             var classes = await _dbContext.Classes.Where(c => c.TermId == termId).ToListAsync();
             return classes; 
         }
+
+        public async Task<Class> AddClassAsync(Class newClass)
+        {
+            await _dbContext.Classes.AddAsync(newClass);
+            await _dbContext.SaveChangesAsync();
+            return newClass;
+
+        }
     }
 }
