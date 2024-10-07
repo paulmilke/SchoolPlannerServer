@@ -21,5 +21,12 @@ namespace SchoolPlanner.Api.Controllers
             var classes = await _classRepository.GetClassesAsync(termID);
             return classes; 
         }
+
+        [HttpPost(Name = "AddClass")]
+        public async Task<ActionResult<Class>> Post(Class newClass)
+        {
+            var addedClass = await _classRepository.AddClassAsync(newClass);
+            return addedClass; 
+        }
     }
 }
