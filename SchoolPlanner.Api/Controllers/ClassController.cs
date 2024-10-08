@@ -28,5 +28,11 @@ namespace SchoolPlanner.Api.Controllers
             var addedClass = await _classRepository.AddClassAsync(newClass);
             return addedClass; 
         }
+
+        [HttpPut(Name = "UpdateClass")]
+        public async Task<ActionResult<int>> Put(Class updatedClass)
+        {
+            return await _classRepository.UpdateClassAsync(updatedClass);
+        }
     }
 }

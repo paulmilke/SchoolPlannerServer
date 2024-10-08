@@ -26,5 +26,11 @@ namespace SchoolPlanner.Data.Repositories
             return newClass;
 
         }
+
+        public async Task<int> UpdateClassAsync(Class updatedClass)
+        {
+            _dbContext.Classes.Update(updatedClass);
+            return await _dbContext.SaveChangesAsync();
+        }
     }
 }
