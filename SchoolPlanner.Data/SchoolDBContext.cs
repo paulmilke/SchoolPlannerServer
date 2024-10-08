@@ -31,7 +31,7 @@ namespace SchoolPlanner.Data
         private void SetTimeStamps()
         {
             var entries = ChangeTracker.Entries()
-                .Where(e => (e.Entity is Term || e.Entity is Class) && (e.State == EntityState.Modified));
+                .Where(e => (e.Entity is Term || e.Entity is Class) && (e.State == EntityState.Modified || e.State == EntityState.Added));
 
             foreach (var entry in entries)
             {
