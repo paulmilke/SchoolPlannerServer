@@ -8,6 +8,7 @@ namespace SchoolPlanner.Data.Interfaces
     {
         Task<IEnumerable<Class>> GetClassesAsync(int termId); 
         Task<Class> AddClassAsync(Class newClass);
-        Task<int> UpdateClassAsync(Class updatedClass); 
+        Task<int> UpdateClassAsync(Class updatedClass);
+        Task<int> DeleteClassAsync(int classId); 
     }
 }

@@ -34,5 +34,11 @@ namespace SchoolPlanner.Api.Controllers
         {
             return await _classRepository.UpdateClassAsync(updatedClass);
         }
+
+        [HttpDelete(Name = "DeleteClass")]
+        public async Task<ActionResult<int>> Delete(int classId)
+        {
+            return await _classRepository.DeleteClassAsync(classId);
+        }
     }
 }
