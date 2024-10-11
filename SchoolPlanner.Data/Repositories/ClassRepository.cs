@@ -32,5 +32,10 @@ namespace SchoolPlanner.Data.Repositories
             _dbContext.Classes.Update(updatedClass);
             return await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<int> DeleteClassAsync(int classId)
+        {
+            return await _dbContext.Classes.Where(c => c.ClassId == classId).ExecuteDeleteAsync(); 
+        }
     }
 }
