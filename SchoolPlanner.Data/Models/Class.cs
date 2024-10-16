@@ -9,10 +9,10 @@ namespace SchoolPlanner.Data.Models
         public required string ClassName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public required string Status { get; set; }
-        public required string InstructorName { get; set; }
-        public required string InstructorPhone { get; set; }
-        public required string InstructorEmail { get; set; }
+        public string? Status { get; set; }
+        public string? InstructorName { get; set; }
+        public string? InstructorPhone { get; set; }
+        public string? InstructorEmail { get; set; }
         public string? Notes {get; set; }
     }
 }
