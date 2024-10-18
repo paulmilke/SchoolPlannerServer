@@ -9,24 +9,45 @@ namespace SchoolPlanner.Api.Controllers
     [Route("[controller]")]
     public class TermController : Controller
     {
-        private readonly ITermRepository _termRepository; 
+        private readonly ITermRepository _termRepository;
 
-        public TermController(ITermRepository termRepository) { 
+        public TermController(ITermRepository termRepository) {
             _termRepository = termRepository;
         }
 
         [HttpGet(Name = "GetTermTest")]
-        public async Task<ActionResult<IEnumerable<Term>>> Get()
+        public async Task<IActionResult> Get([FromQuery] int? termId)
         {
-            try
+            if (termId.HasValue)
             {
-                var terms = await _termRepository.GetAllTermsAsync();
-                return Ok(terms);
+                try
+                {
+                    var term = await _termRepository.FindTermAsync(termId.Value);
+                    if (term == null)
+                    {
+                        return NotFound();
+                    }
+                    return Ok(term);
+                }
+                catch
+                {
+                    return BadRequest(); 
+                }
+
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, $"An error occurred while fetching terms. {ex}");
+                try
+                {
+                    var terms = await _termRepository.GetAllTermsAsync();
+                    return Ok(terms);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode((int)HttpStatusCode.InternalServerError, $"An error occurred while fetching terms. {ex}");
+                }
             }
+
 
         }
 
