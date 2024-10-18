@@ -13,6 +13,12 @@ namespace SchoolPlanner.Data.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task<Class?> GetSingleClassAsync(int classId)
+        {
+            var singleClass = await _dbContext.Classes.Where(c => c.ClassId == classId).SingleOrDefaultAsync();
+            return singleClass; 
+        }
+
         public async Task<IEnumerable<Class>> GetClassesAsync(int termId)
         {
             var classes = await _dbContext.Classes.Where(c => c.TermId == termId).ToListAsync();

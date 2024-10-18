@@ -10,15 +10,37 @@ namespace SchoolPlanner.Api.Controllers
     [Route("[controller]")]
     public class ClassController : Controller
     {
-        private readonly IClassRepository _classRepository; 
+        private readonly IClassRepository _classRepository;
 
         public ClassController(IClassRepository classrepository)
         {
-            _classRepository = classrepository; 
+            _classRepository = classrepository;
+        }
+
+        [HttpGet("{classId:int}", Name = "GetSingleClass" )]
+        public async Task<IActionResult> GetSingleClass(int classId)
+        {
+            try
+            {
+                var singleClass = await _classRepository.GetSingleClassAsync(classId);
+                if (singleClass == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(singleClass);
+                }
+            }
+            catch
+            {
+                return BadRequest(); 
+            }
+
         }
 
         [HttpGet(Name = "GetClasses")]
-        public async Task<ActionResult<IEnumerable<Class>>> Get(int termID)
+        public async Task<ActionResult<IEnumerable<Class>>> GetClasses(int termID)
         {
             try
             {
