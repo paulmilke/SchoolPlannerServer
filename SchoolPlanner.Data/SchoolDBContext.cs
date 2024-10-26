@@ -14,11 +14,13 @@ namespace SchoolPlanner.Data
 
         public DbSet<Term> Terms { get; set; }
         public DbSet<Class> Classes { get; set; }
+        public DbSet<Assessment> Assessments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Term>().Property<DateTime>("UpdatedOn");
             modelBuilder.Entity<Class>().Property<DateTime>("UpdatedOn");
+            modelBuilder.Entity<Assessment>().Property<DateTime>("UpdatedOn"); 
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -31,7 +33,7 @@ namespace SchoolPlanner.Data
         private void SetTimeStamps()
         {
             var entries = ChangeTracker.Entries()
-                .Where(e => (e.Entity is Term || e.Entity is Class) && (e.State == EntityState.Modified || e.State == EntityState.Added));
+                .Where(e => (e.Entity is Term || e.Entity is Class || e.Entity is Assessment) && (e.State == EntityState.Modified || e.State == EntityState.Added));
 
             foreach (var entry in entries)
             {
