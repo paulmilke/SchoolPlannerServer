@@ -15,7 +15,8 @@ builder.Services.AddDbContext<SchoolDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<ITermRepository, TermRepository>();
-builder.Services.AddScoped<IClassRepository, ClassRepository>(); 
+builder.Services.AddScoped<IClassRepository, ClassRepository>();
+builder.Services.AddScoped<IAssessmentRepository, AssessmentRepository>();
 
 var app = builder.Build();
 
