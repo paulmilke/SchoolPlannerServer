@@ -5,6 +5,9 @@
 *.userosscache
 *.sln.docstates
 
+# Deployment artifacts
+SchoolPlanner.Api/Properties/ServiceDependencies/*
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
