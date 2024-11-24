@@ -15,6 +15,7 @@ namespace SchoolPlanner.Api.Controllers
             _termRepository = termRepository;
         }
 
+        //This get method will return either a single Term or all Terms depending on if the request included a term id or not. 
         [HttpGet(Name = "GetTermTest")]
         public async Task<IActionResult> Get([FromQuery] int? termId)
         {
