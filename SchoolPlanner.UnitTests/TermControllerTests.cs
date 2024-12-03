@@ -8,7 +8,8 @@ namespace SchoolPlanner.UnitTests
 {
     public class TermControllerTests
     {
-
+        
+        //Create mock properties for the repo and controller. 
         private readonly Mock<ITermRepository> _mockTermRepository;
         private readonly TermController _termController; 
 
@@ -19,7 +20,6 @@ namespace SchoolPlanner.UnitTests
             _termController = new TermController(_mockTermRepository.Object);
         }
 
-        //Tests against the terms controller for returning a list of terms. 
         [Fact]
         public async Task GetTerms_ShouldReturnOkResult()
         {
