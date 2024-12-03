@@ -20,7 +20,6 @@ namespace SchoolPlanner.UnitTests
             _termController = new TermController(_mockTermRepository.Object);
         }
 
-        //Tests against the terms controller for returning a list of terms. 
         [Fact]
         public async Task GetTerms_ShouldReturnOkResult()
         {
