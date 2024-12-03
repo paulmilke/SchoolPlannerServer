@@ -8,7 +8,8 @@ namespace SchoolPlanner.UnitTests
 {
     public class TermControllerTests
     {
-
+        
+        //Create mock properties for the repo and controller. 
         private readonly Mock<ITermRepository> _mockTermRepository;
         private readonly TermController _termController; 
 
